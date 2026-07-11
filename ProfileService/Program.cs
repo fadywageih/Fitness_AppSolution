@@ -1,33 +1,25 @@
-using IdentityService.Features.ChangePassword;
-using IdentityService.Features.CompleteProfile;
-using IdentityService.Features.ForgotPassword;
-using IdentityService.Features.Login;
-using IdentityService.Features.Logout;
-using IdentityService.Features.RefreshToken;
-using IdentityService.Features.Register;
-using IdentityService.Features.ResetPassword;
-using IdentityService.Features.VerifyOtp;
-using IdentityService.Persistence;
-using IdentityService.Services;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProfileService.Features.UpdateProfile;
+using ProfileService.Features.UpdateSettings;
+using ProfileService.Features.UploadPicture;
+using ProfileService.Features.ViewProfile;
+using ProfileService.Features.ViewSettings;
+using ProfileService.Persistence;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Database
-builder.Services.AddDbContext<IdentityDbContext>(options =>
+builder.Services.AddDbContext<ProfileDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-// Services
-builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-builder.Services.AddScoped<IJwtService, JwtService>();
+// HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
 
 // JWT Authentication
@@ -59,12 +51,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new()
-    {
-        Title = "IdentityService",
-        Version = "1.0",
-        Description = "Elevate Fitness - Authentication & Identity Service"
-    });
+    c.SwaggerDoc("v1", new() { Title = "ProfileService", Version = "1.0" });
 
     c.AddSecurityDefinition("Bearer", new()
     {
@@ -78,17 +65,7 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(new()
     {
-        {
-            new()
-            {
-                Reference = new()
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
+        { new() { Reference = new() { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, Array.Empty<string>() }
     });
 });
 
@@ -103,15 +80,10 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRegisterEndpoint();
-app.MapLoginEndpoint();
-app.MapCompleteProfileEndpoint();
-app.MapForgotPasswordEndpoint();
-app.MapVerifyOtpEndpoint();
-app.MapResetPasswordEndpoint();
-app.MapRefreshTokenEndpoint();
-app.MapChangePasswordEndpoint();
-
-app.MapLogoutEndpoint();
+app.MapViewProfileEndpoint();
+app.MapUpdateProfileEndpoint();
+app.MapViewSettingsEndpoint();
+app.MapUpdateSettingsEndpoint();
+app.MapUploadPictureEndpoint();
 
 app.Run();
