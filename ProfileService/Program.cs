@@ -1,7 +1,9 @@
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProfileService.Consumers;
 using ProfileService.Features.UpdateProfile;
 using ProfileService.Features.UpdateSettings;
 using ProfileService.Features.UploadPicture;
@@ -21,6 +23,24 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 
 // HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
+
+// MassTransit - RabbitMQ with Consumer
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<UserRegisteredConsumer>();
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        cfg.ReceiveEndpoint("profile-user-registered", e =>
+        {
+            e.ConfigureConsumer<UserRegisteredConsumer>(context);
+        });
+    });
+});
 
 // JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtOptions");
