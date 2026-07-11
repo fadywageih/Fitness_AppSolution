@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Fitness_App/Fitness_App.csproj" />
   <Project Path="IdentityService/IdentityService.csproj" Id="68925a6e-9c3c-4093-a707-0e398f2b578b" />
+  <Project Path="ProfileService/ProfileService.csproj" Id="5aa86c79-04f9-4aee-be69-5dc33d25b286" />
 </Solution>
