@@ -7,5 +7,6 @@
   <Project Path="Progress-Tracking/Progress-Tracking.csproj" Id="23cb2006-6189-44dd-a421-2f185e773eec" />
   <Project Path="SharedContracts/SharedContracts.csproj" Id="8502e8f4-a8df-49c7-aaf0-8f499ba3e9d9" />
   <Project Path="SmartCoach/SmartCoach.csproj" Id="32359d18-5290-4b7d-b6de-98039f4e499f" />
+  <Project Path="SubscriptionService/SubscriptionService.csproj" Id="677f741b-e23b-4d88-9e9a-9fbe4be4ebd2" />
   <Project Path="WorkoutCatalog/WorkoutCatalog.csproj" Id="f916cb72-bec1-41fa-9be7-638748b59e2a" />
 </Solution>
