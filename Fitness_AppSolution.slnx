@@ -4,4 +4,5 @@
   <Project Path="IdentityService/IdentityService.csproj" Id="68925a6e-9c3c-4093-a707-0e398f2b578b" />
   <Project Path="ProfileService/ProfileService.csproj" Id="5aa86c79-04f9-4aee-be69-5dc33d25b286" />
   <Project Path="SharedContracts/SharedContracts.csproj" Id="8502e8f4-a8df-49c7-aaf0-8f499ba3e9d9" />
+  <Project Path="WorkoutCatalog/WorkoutCatalog.csproj" Id="f916cb72-bec1-41fa-9be7-638748b59e2a" />
 </Solution>
