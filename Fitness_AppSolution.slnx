@@ -2,6 +2,7 @@
   <Project Path="FitnessEngine/FitnessEngine.csproj" Id="b32894dd-7408-4f3a-8782-79ec00ac6a9f" />
   <Project Path="Fitness_App/Fitness_App.csproj" />
   <Project Path="IdentityService/IdentityService.csproj" Id="68925a6e-9c3c-4093-a707-0e398f2b578b" />
+  <Project Path="NotificationService/NotificationService.csproj" Id="6ad9130a-acfa-4dc0-b133-88d135614fc0" />
   <Project Path="NutritionService/NutritionService.csproj" Id="e6b8a38d-ddce-4d35-bd16-b64e0c055f9e" />
   <Project Path="ProfileService/ProfileService.csproj" Id="5aa86c79-04f9-4aee-be69-5dc33d25b286" />
   <Project Path="Progress-Tracking/Progress-Tracking.csproj" Id="23cb2006-6189-44dd-a421-2f185e773eec" />
